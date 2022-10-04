@@ -29,7 +29,7 @@ module.exports = function (RED) {
 						var rawSigningKey = new Buffer.from(node.key, "base64");
 						//var body = '{"network_id":6931881,"event":"network.created","timestamp":"2022-10-04T18:33:37.035Z"}';
 						var utf8EncodedBody = Buffer.from(msg.payload, "utf8");
-						var signature = crypto.createHmac("sha256", rawSigningKey).update(utf8EncodedBody).digest("base64");
+						var signature = Crypto.createHmac("sha256", rawSigningKey).update(utf8EncodedBody).digest("base64");
 						if (signature == msg.req.headers.Eero-Signature){
 							result = true;
 						}else{
