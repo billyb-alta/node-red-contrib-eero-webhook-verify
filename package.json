@@ -1,0 +1,27 @@
+{
+  "name": "node-red-contrib-eero-webhook-verify",
+  "version": "0.1",
+  "description": "Node-RED nodes using CryptoJS to validate Eero webhook security",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/billyb-alta/node-red-contrib-eero-webhook-verify.git"
+  },
+  "scripts": {
+    "test": "node-red"
+  },
+  "keywords": [
+    "node-red"
+  ],
+  "author": "billyb-alta",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/billyb-alta/node-red-contrib-eero-webhook-verify/issues"
+  },
+  "homepage": "https://github.com/billyb-alta/node-red-contrib-eero-webhook-verify#readme",
+  "dependencies": {},
+  "node-red": {
+    "nodes": {
+      "hmac": "cryptojs/hmac.js",
+    }
+  }
+}
