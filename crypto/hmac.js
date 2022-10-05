@@ -1,5 +1,6 @@
 module.exports = function (RED) {
-	var Crypto = require("crypto");
+	var hmacSHA256 = require("crypto-js/hmac-sha256");
+	var Base64 = require('crypto-js/enc-base64');
 
 	function DigestNode(config) {
 		RED.nodes.createNode(this, config);
@@ -25,11 +26,7 @@ module.exports = function (RED) {
 						// debugging message
 						node.debug('Creating a digest of payload using '+node.algorithm);
 						// digest with Crypto
-						//var signingKey = "FeoQddXfIp6ZQ6Stb1pa8u/Gmez0z97sn/izVm0WBoY=";
-						var rawSigningKey = new Buffer.from(node.key, "base64");
-						//var body = '{"network_id":6931881,"event":"network.created","timestamp":"2022-10-04T18:33:37.035Z"}';
-						var utf8EncodedBody = Buffer.from(msg.payload, "utf8");
-						var signature = Crypto.createHmac("sha256", rawSigningKey).update(utf8EncodedBody).digest("base64");
+						var signature = Base64.stringify(hmacSHA256(msg.payload, Base64.parse(node.key)));
 						if (signature == msg.req.headers.Eero-Signature){
 							result = true;
 						}else{
